@@ -1,26 +1,22 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LocationForm from './LocationForm'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
+
+export default class App extends React.Component {
+  getWeather = async (e) => {
+    e.preventDefault();
+    const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${Api_Key}`);   
+    const response = await request.json();
+    console.log(response);
+  }
+  render() { 
+    return (
+      <div className="App">
+          <LocationForm loadWeatherData={this.getWeather} />
+      </div>
+    );
+  }
 }
-
-export default App;
