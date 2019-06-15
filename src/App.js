@@ -11,7 +11,7 @@ export default class App extends React.Component {
     const latitude = e.target.elements.latitude.value;
     const longitude = e.target.elements.longitude.value;
     const city = e.target.elements.city.value;
-    const request;
+
     if(latitude && longitude) {
       const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${Api_Key}`);
       const response = await request.json();
