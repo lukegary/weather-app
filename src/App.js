@@ -20,10 +20,18 @@ export default class App extends React.Component {
   }
 
   getWeather = async (e) => {
-    e.preventDefault();
+    this.setState({
+      temperature: undefined,
+      city: undefined,
+      humidity: undefined,
+      pressure: undefined,
+      temp_min: undefined,
+      temp_max: undefined
+    })
     const latitude = e.target.elements.latitude.value;
     const longitude = e.target.elements.longitude.value;
     const city = e.target.elements.city.value;
+    e.preventDefault();
     let request = "";
     if(city) {
       request = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},us&units=imperial&appid=${Api_Key}`);
@@ -31,6 +39,7 @@ export default class App extends React.Component {
       request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&units=imperial&appid=${Api_Key}`);
     }
     const response = await request.json();
+    console.log(response);
     this.setState({
       temperature: response.main.temp,
       hightemperature: response.main.temp,
@@ -47,7 +56,7 @@ export default class App extends React.Component {
           <LocationForm loadWeatherData={this.getWeather} />
           {
               this.state.city && <div>Weather today in 
-                  <span>  {this.state.city} {this.state.country}</span> 
+                  <span>  {this.state.city} </span> 
                   <MyChart temperature={this.state.temperature} high={this.state.temp_max} low={this.state.temp_min} 
                   humidity={this.state.humidity} pressure={this.state.pressure} />                   
               </div> 
