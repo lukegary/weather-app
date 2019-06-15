@@ -1,5 +1,5 @@
 import React from 'react';
-const Api_Key = "2fc94e6f161976c8d4b98ce385cc29f4";
+
 const LocationForm = (props) => {
 	return (
 	  <form onSubmit={props.loadWeatherData}>
