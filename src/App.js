@@ -3,12 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import LocationForm from './LocationForm'
 
-const Api_Key = "2fc94e6f161976c8d4b98ce385cc29f4";
+const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
 
 export default class App extends React.Component {
   getWeather = async (e) => {
     e.preventDefault();
-    const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${Api_Key}`);   
+    const latitude = e.target.elements.latitude.value;
+    const longitude = e.target.elements.longitude.value;
+    const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${Api_Key}`);   
     const response = await request.json();
     console.log(response);
   }
