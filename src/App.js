@@ -6,6 +6,9 @@ import MyChart from './MyChart';
 
 const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
 
+
+
+
 export default class App extends React.Component {
   state = {
     temperature: undefined,
@@ -22,10 +25,10 @@ export default class App extends React.Component {
     const longitude = e.target.elements.longitude.value;
     const city = e.target.elements.city.value;
     let request = "";
-    if(latitude && longitude) {
-      request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&units=imperial&appid=${Api_Key}`);
-    } else if(city) {
+    if(city) {
       request = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},us&units=imperial&appid=${Api_Key}`);
+    } else if(latitude && longitude) {
+      request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&units=imperial&appid=${Api_Key}`);
     }
     const response = await request.json();
     this.setState({
@@ -45,7 +48,8 @@ export default class App extends React.Component {
           {
               this.state.city && <div>Weather today in 
                   <span>  {this.state.city} {this.state.country}</span> 
-                  <MyChart temperature={this.state.temperature} high={this.state.temp_max} low={this.state.temp_min} />                   
+                  <MyChart temperature={this.state.temperature} high={this.state.temp_max} low={this.state.temp_min} 
+                  humidity={this.state.humidity} pressure={this.state.pressure} />                   
               </div> 
           }
 
